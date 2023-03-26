@@ -29,6 +29,26 @@ const addressSchema = new mongoose.Schema(
     collection: "member-address",
   }
 );
+// 商品
+const commoditySchema = new mongoose.Schema(
+  {
+    commodityId: Number,
+    type: Number,
+    name: String,
+    classification: String,
+    mainPath: String,
+    otherPath: Array,
+    material: String,
+    occasion: Array,
+    price: Number,
+    inventory: Number,
+    quantity: Number,
+    specification: Array,
+  },
+  {
+    collection: "commodity",
+  }
+);
 // 订单
 const orderSchema = new mongoose.Schema(
   {
@@ -89,6 +109,7 @@ const chatClientSchema = new mongoose.Schema(
 module.exports = {
   member: mongoose.model("member", memberSchema),
   address: mongoose.model("member-address", addressSchema),
+  commodity: mongoose.model("commodity", commoditySchema),
   order: mongoose.model("order", orderSchema),
   orderCommodity: mongoose.model("order-commodity", orderCommoditySchema),
   chatIm: mongoose.model("chat-im", chatImSchema),

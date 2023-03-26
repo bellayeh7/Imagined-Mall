@@ -9,7 +9,7 @@ router.prefix("/api/member");
  * @param  {String} options.openid [微信小程序openid] required
  * @return {Object} result
  */
-router.get("/userInfo", async (ctx) => {
+router.get("/info", async (ctx) => {
   await member
     .findOne({ openid: ctx.query.openid })
     .then((res) => {
@@ -25,7 +25,7 @@ router.get("/userInfo", async (ctx) => {
  * @param  {String} options.openid [微信小程序openid] required
  * @return {Object} result
  */
-router.get("/findAllUser", async (ctx) => {
+router.get("/findAll", async (ctx) => {
   await member
     .find({ openid: ctx.query.openid })
     .then((res) => {
@@ -49,7 +49,7 @@ router.get("/findAllUser", async (ctx) => {
  * @param  {String} loginTime required
  * @return {Object} result
  */
-router.post("/addUser", async (ctx) => {
+router.post("/add", async (ctx) => {
   let { appid, openid, avatarUrl, nickName, isInsider, loginTime } =
     ctx.request.body;
   await member
@@ -78,7 +78,7 @@ router.post("/addUser", async (ctx) => {
  * @param  {String} openid required
  * @return {Object} result
  */
-router.post("/deleteUser", async (ctx) => {
+router.post("/delete", async (ctx) => {
   let { openid } = ctx.request.body;
   await member
     .deleteOne({ openid })
@@ -95,7 +95,7 @@ router.post("/deleteUser", async (ctx) => {
  * @param  {Array} openid required
  * @return {Object} result
  */
-router.post("/batchDeleteUser", async (ctx) => {
+router.post("/batchDelete", async (ctx) => {
   let { openid } = ctx.request.body;
   await member
     .deleteMany({ openid: { $in: openid } })
@@ -117,7 +117,7 @@ router.post("/batchDeleteUser", async (ctx) => {
  * @param  {Boolean} loginTime unrequired
  * @return {Object} result
  */
-router.post("/updateUser", async (ctx) => {
+router.post("/update", async (ctx) => {
   const {openid, ...changeData} = ctx.request.body;
   await member
     .updateOne(
